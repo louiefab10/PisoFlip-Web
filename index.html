@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Piso Flip</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="coin" id="coin">
+                <div class="heads">
+                    <img src="img/heads.imageset/1*AbCy6_7p6_gecetSMQgqDA.png" alt="heads">
+                </div>
+                <div class="tails">
+                    <img src="img/tails.imageset/1*zB-fSZE3emczkxmpuOlFgg.png" alt="tails">
+                </div>
+            </div>
+            <div class="stats">
+                <p id="heads-count">Heads: 0</p>
+                <p id="tails-count">Tails: 0</p>
+            </div>
+            <div class="buttons">
+                <button id="flip-button">Flip Coin</button>
+                <button id="reset-button">Reset Tally</button>
+            </div>
+        </div>
+        <script>
+            let coin = document.querySelector(".coin");
+            let btnFlip = document.querySelector("#flip-button");
+            let btnReset = document.querySelector("#reset-button");
+            let heads = 0;
+            let tails = 0;
+            btnFlip.addEventListener("click", () =>{
+                let a = Math.floor(Math.random() * 2);
+                coin.style.animation = "none";
+                if(a){
+                    setTimeout(function(){
+                        coin.style.animation = "spin-heads 3s forwards";
+                    }, 100);
+                    heads++;
+                }
+                else{
+                    setTimeout(function(){
+                        coin.style.animation = "spin-tails 3s forwards";
+                    }, 100);
+                    tails++;
+                }
+                setTimeout(updateStats, 3000);
+                disableButton();
+            });
+            function updateStats(){
+                document.querySelector("#heads-count").textContent = `Heads: 
+                ${heads}`;
+                document.querySelector("#tails-count").textContent = `Tails: 
+                ${tails}`;
+            }
+            function disableButton(){
+                btnFlip.disabled = true;
+                setTimeout(function(){
+                    btnFlip.disabled = false;
+                },3000);
+            }
+            btnReset.addEventListener("click", () => {
+                coin.style.animation = "none";
+                heads = 0;
+                tails = 0;
+                updateStats();
+            });
+        </script>
+    </body>
+</html>
