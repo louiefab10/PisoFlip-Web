@@ -86,6 +86,7 @@ button{
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
+    font-family: 'Source Code Pro', monospace;
 }
 #flip-button{
     background-color: #B9005B;
